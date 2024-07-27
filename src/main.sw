@@ -172,7 +172,7 @@ impl StoreString for Contract {
             let name_hash = sha256(myname.unwrap());
             let record = storage.names.get(name_hash).try_read().unwrap();
             //need to check owner of the name, if expiry and bought by another one, should return none
-            if timestamp() <= record.expiry && msg_sender().unwrap() == record.identity {
+            if timestamp() <= record.expiry && identity == record.identity {
                Some(myname.unwrap())
             }else{
                None
